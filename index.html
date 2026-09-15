@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luqman Hakeem — Graphic &amp; Multimedia Designer</title>
+<meta name="description" content="Portfolio of Luqman Hakeem — brand identity, 3D product visualization, digital art, UI design and web design.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='68' font-family='Arial Black,sans-serif' font-size='56' font-weight='900' fill='%23ff3b2f' text-anchor='middle'%3ELH%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__mark">LH</div>
+  <div class="loader__count" id="loaderCount">0</div>
+  <div class="loader__bar"><span id="loaderBar"></span></div>
+</div>
+
+<!-- ============ GRAIN OVERLAY ============ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ CUSTOM CURSOR ============ -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <div class="cursor__ring"></div>
+</div>
+
+<!-- ============ SCROLL PROGRESS ============ -->
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__logo" data-hover>LH<span>.</span></a>
+  <nav class="nav__links">
+    <a href="#work" data-hover>Work</a>
+    <a href="#about" data-hover>About</a>
+    <a href="#contact" data-hover>Contact</a>
+  </nav>
+  <a href="mailto:lukeman965@gmail.com" class="nav__cta" data-hover>Say hello →</a>
+  <button class="nav__burger" id="burger" aria-label="Toggle menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#work" data-hover>Work</a>
+  <a href="#about" data-hover>About</a>
+  <a href="#contact" data-hover>Contact</a>
+  <a href="mailto:lukeman965@gmail.com" data-hover>Say hello</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__bg-text" aria-hidden="true">
+      <span>DESIGN</span><span>DESIGN</span><span>DESIGN</span>
+    </div>
+
+    <div class="hero__inner">
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal-line"><span>Graphic &amp; Multimedia Designer — Based in Selangor, Malaysia</span></p>
+
+        <h1 class="hero__title">
+          <span class="line" data-speed="0.15"><span class="word">LUQMAN</span></span>
+          <span class="line" data-speed="0.3"><span class="word glitch" data-text="HAKEEM">HAKEEM</span></span>
+        </h1>
+
+        <p class="hero__desc reveal-line">
+          <span>I build brands, render products, and design interfaces —
+          then push every one of them a little further than the brief asked for.</span>
+        </p>
+
+        <a href="#work" class="hero__scroll" data-hover>
+          <span>Scroll to explore</span>
+          <i></i>
+        </a>
+      </div>
+
+      <div class="hero__media reveal">
+        <img src="assets/img/photo-portrait-luqman.png" alt="Portrait of Luqman Hakeem" loading="lazy">
+        <div class="hero__media-frame" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" data-marquee>
+      <span>BRAND IDENTITY</span><span>★</span>
+      <span>3D PRODUCT VIZ</span><span>✦</span>
+      <span>DIGITAL ART</span><span>♣</span>
+      <span>UI / UX</span><span>★</span>
+      <span>WEB DESIGN</span><span>✦</span>
+      <span>ART DIRECTION</span><span>♣</span>
+    </div>
+  </div>
+
+  <!-- ============ WORK ============ -->
+  <section class="work" id="work">
+    <div class="section-head reveal">
+      <h2 class="section-title">SELECTED<br>WORK<span class="accent">.</span></h2>
+      <p class="section-sub">A mix of brand systems, 3D visualization, digital art, and interface design —
+        filter by discipline or just scroll.</p>
+    </div>
+
+    <div class="filters reveal" id="filters">
+      <button class="filter active" data-filter="all" data-hover>All</button>
+      <button class="filter" data-filter="branding" data-hover>Branding</button>
+      <button class="filter" data-filter="3d" data-hover>3D &amp; Product</button>
+      <button class="filter" data-filter="art" data-hover>Digital Art</button>
+      <button class="filter" data-filter="ui" data-hover>UI / UX</button>
+      <button class="filter" data-filter="web" data-hover>Web Design</button>
+    </div>
+
+    <div class="grid" id="grid"><!-- injected by script.js --></div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="about__body">
+      <p class="section-eyebrow reveal">About</p>
+      <h2 class="about__title reveal">
+        Still figuring out<br>which lane to lock into<span class="accent">—</span><br>
+        so I'm good at all of them.
+      </h2>
+      <p class="about__text reveal">
+        <!-- EDIT ME: replace with your own bio -->
+        I'm a graphic and multimedia designer currently pursuing a Bachelor in Advertising Design,
+        with a Diploma in Multimedia behind me. My work moves between brand identity, 3D product
+        visualization, UI design, and straight-up digital art — I'd rather learn a new tool than
+        stay comfortable in one lane.
+      </p>
+
+      <div class="about__skills reveal">
+        <p class="about__skills-label">Tools</p>
+        <ul class="skills-list">
+          <!-- EDIT ME: update with your actual tool list -->
+          <li>Photoshop</li>
+          <li>Illustrator</li>
+          <li>After Effects</li>
+          <li>Blender</li>
+          <li>Figma</li>
+          <li>Premiere Pro</li>
+          <li>Basic Coding</li>
+          <li>Vibe Coding</li>
+        </ul>
+      </div>
+
+      <a href="#contact" class="btn reveal" data-hover>Let's work together</a>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="contact__marquee" aria-hidden="true">
+      <div class="marquee__track marquee__track--reverse" data-marquee>
+        <span>LET'S TALK</span><span>★</span>
+        <span>LET'S BUILD</span><span>✦</span>
+        <span>LET'S CREATE</span><span>★</span>
+        <span>SAY HELLO</span><span>✦</span>
+        <span>OPEN FOR WORK</span><span>★</span>
+      </div>
+    </div>
+
+    <h2 class="contact__title reveal">
+      GOT A PROJECT<br>
+      WORTH <span class="glitch" data-text="OBSESSING">OBSESSING</span><br>
+      OVER?
+    </h2>
+
+    <a href="mailto:lukeman965@gmail.com" class="contact__email reveal" data-hover>lukeman965@gmail.com</a>
+    <a href="https://wa.me/60102054352" target="_blank" rel="noopener" class="contact__whatsapp reveal" data-hover>
+      <span class="contact__whatsapp-dot" aria-hidden="true"></span> WhatsApp — 010-205 4352
+    </a>
+
+    <div class="contact__links reveal">
+      <a href="https://instagram.com/sugarbrownluke" target="_blank" rel="noopener" data-hover>Instagram ↗</a>
+    </div>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Luqman Hakeem</span>
+      <span>Designed &amp; coded from scratch</span>
+    </footer>
+  </section>
+
+</main>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Close" data-hover>✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image" data-hover>‹</button>
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image" data-hover>›</button>
+  <div class="lightbox__inner">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox__info">
+      <p class="lightbox__cat" id="lightboxCat"></p>
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxDesc"></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
