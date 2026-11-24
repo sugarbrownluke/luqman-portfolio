@@ -50,6 +50,7 @@
   <a href="#top" class="nav__logo" data-hover data-magnetic>LH<span>.</span></a>
   <nav class="nav__links">
     <a href="#work" data-hover data-scramble>Work</a>
+    <a href="#ai" data-hover data-scramble class="nav__ai">AI Lab</a>
     <a href="#about" data-hover data-scramble>About</a>
     <a href="#contact" data-hover data-scramble>Contact</a>
   </nav>
@@ -65,9 +66,10 @@
 <!-- ============ MOBILE MENU ============ -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#work"><small>01</small>Work</a>
-  <a href="#about"><small>02</small>About</a>
-  <a href="#contact"><small>03</small>Contact</a>
-  <a href="mailto:lukeman965@gmail.com"><small>04</small>Say hello</a>
+  <a href="#ai"><small>02</small>AI Lab</a>
+  <a href="#about"><small>03</small>About</a>
+  <a href="#contact"><small>04</small>Contact</a>
+  <a href="mailto:lukeman965@gmail.com"><small>05</small>Say hello</a>
 </div>
 
 <main id="top">
@@ -126,6 +128,7 @@
       <span>UI / UX</span><span>★</span>
       <span>WEB DESIGN</span><span>✦</span>
       <span>ART DIRECTION</span><span>♣</span>
+      <span>AI PROMPTING</span><span>✦</span>
     </div>
   </div>
   <div class="marquee marquee--tilt-r marquee--outline" aria-hidden="true">
@@ -139,9 +142,9 @@
 
   <!-- ============ STATS ============ -->
   <section class="stats">
-    <div class="stat reveal"><b data-count="10">0</b><span>Projects shipped<br>on this page</span></div>
-    <div class="stat reveal"><b data-count="5">0</b><span>Disciplines<br>refusing to pick one</span></div>
-    <div class="stat reveal"><b data-count="8">0</b><span>Tools in the<br>daily rotation</span></div>
+    <div class="stat reveal"><b data-count="12" id="statProjects">0</b><span>Projects shipped<br>on this page</span></div>
+    <div class="stat reveal"><b data-count="6">0</b><span>Disciplines<br>refusing to pick one</span></div>
+    <div class="stat reveal"><b data-count="9">0</b><span>Tools in the<br>daily rotation</span></div>
     <div class="stat reveal"><b data-count="2026" data-from="2019">0</b><span>Still levelling<br>up, every year</span></div>
   </section>
 
@@ -162,6 +165,7 @@
         <button class="filter" data-filter="art" data-hover>Digital Art <sup></sup></button>
         <button class="filter" data-filter="ui" data-hover>UI / UX <sup></sup></button>
         <button class="filter" data-filter="web" data-hover>Web Design <sup></sup></button>
+        <button class="filter filter--ai" data-filter="ai" data-hover>AI Prompted <sup></sup></button>
       </div>
       <div class="view-toggle" role="group" aria-label="Layout">
         <button class="view-btn active" data-view="grid" data-hover>Grid</button>
@@ -185,9 +189,69 @@
     </div>
   </section>
 
+  <!-- ============ AI LAB ============ -->
+  <section class="ai" id="ai">
+    <div class="ai__ticker" aria-hidden="true">
+      <div class="marquee__track" data-marquee data-speed="1.2">
+        <span>AI-PROMPTED</span><span>◆</span>
+        <span>HUMAN-DIRECTED</span><span>◆</span>
+        <span>PROMPT → PIXELS</span><span>◆</span>
+        <span>ZERO KEYFRAMES</span><span>◆</span>
+      </div>
+    </div>
+
+    <div class="ai__inner">
+      <header class="ai__head">
+        <p class="section-eyebrow reveal">(03) — AI Lab</p>
+        <h2 class="ai__title" data-split-words>PROMPTED, NOT <span class="ai__strike">TEMPLATED</span><span class="accent">.</span></h2>
+        <div class="ai__intro reveal">
+          <p class="ai__badge"><i></i> Disclosure: made with AI</p>
+          <p>These two motion loops were built by prompting an AI. I didn't keyframe them or write the code by hand.
+            I wrote the direction, judged every version, and kept pushing until the result matched what I saw in my head.
+            That direction is the skill, and it's what I'm showing here.</p>
+        </div>
+      </header>
+
+      <!-- EDIT ME: swap the direction lines for your real prompt notes if you want -->
+      <div class="ai__pieces" id="aiPieces"><!-- injected by script.js from AI_PIECES --></div>
+
+      <div class="ai__why">
+        <h3 class="ai__why-title reveal">Why prompting is a design skill</h3>
+        <div class="ai__cards">
+          <article class="ai-card reveal" data-hover>
+            <span class="ai-card__icon" aria-hidden="true">⌘</span>
+            <h4>Direction into words</h4>
+            <p>I turn a picture in my head into precise instructions: palette, type, layout, motion timing, and what loops versus what stays still.</p>
+          </article>
+          <article class="ai-card reveal" data-hover>
+            <span class="ai-card__icon" aria-hidden="true">↻</span>
+            <h4>Iterate like an art director</h4>
+            <p>The first output is never the final. I review each pass, name exactly what's off, and steer until it's right.</p>
+          </article>
+          <article class="ai-card reveal" data-hover>
+            <span class="ai-card__icon" aria-hidden="true">◎</span>
+            <h4>On-brand, every time</h4>
+            <p>The real product, the real colours, the real claims. AI output only matters if a brand can actually use it.</p>
+          </article>
+          <article class="ai-card reveal" data-hover>
+            <span class="ai-card__icon" aria-hidden="true">⚡</span>
+            <h4>Hours, not weeks</h4>
+            <p>Pieces that would normally need an animator and a developer, delivered as one person with a sharp brief.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="ai__closer reveal">
+        <p class="ai__closer-kicker">Every company is getting AI tools.</p>
+        <p class="ai__closer-line">Few have someone who can <em>actually drive them</em>.</p>
+        <a href="#contact" class="btn btn--ai" data-hover data-magnetic><span>Hire the prompter</span><i>→</i></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ ABOUT ============ -->
   <section class="about" id="about">
-    <p class="section-eyebrow reveal">(03) — About</p>
+    <p class="section-eyebrow reveal">(04) — About</p>
     <h2 class="about__title" data-scroll-fill>
       Still figuring out which lane to lock into — so I'm good at all of them.
     </h2>
@@ -213,6 +277,7 @@
           <li data-hover>Premiere Pro</li>
           <li data-hover>Basic Coding</li>
           <li data-hover>Vibe Coding</li>
+          <li data-hover class="skill--ai">AI Prompting</li>
         </ul>
       </div>
     </div>
@@ -238,7 +303,7 @@
       </div>
     </div>
 
-    <p class="section-eyebrow reveal">(04) — Contact</p>
+    <p class="section-eyebrow reveal">(05) — Contact</p>
     <h2 class="contact__title reveal">
       GOT A PROJECT<br>
       WORTH <span class="glitch" data-text="OBSESSING">OBSESSING</span><br>
@@ -276,7 +341,10 @@
   <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image" data-hover>‹</button>
   <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image" data-hover>›</button>
   <div class="lightbox__inner">
-    <div class="lightbox__media"><img id="lightboxImg" src="" alt=""></div>
+    <div class="lightbox__media">
+      <img id="lightboxImg" src="" alt="">
+      <iframe id="lightboxFrame" title="Live animation" hidden></iframe>
+    </div>
     <div class="lightbox__info">
       <p class="lightbox__cat" id="lightboxCat"></p>
       <h3 id="lightboxTitle"></h3>

@@ -90,14 +90,75 @@ const PROJECTS = [
     year: "2025",
     images: ["assets/img/brand-agasjello-packaging.jpg"],
     desc: "Packaging design for Malaysia's first chocolate jelly bar — bold color-blocking built to pop on a crowded shelf."
+  },
+  {
+    title: "Creatine Surge",
+    category: "ai",
+    categoryLabel: "AI Motion — Prompted",
+    year: "2026",
+    ai: true,
+    loop: "assets/loops/creatine-surge.html",
+    images: ["assets/img/ai-creatine-surge-poster.jpg"],
+    desc: "A looping product animation for the ONTHEGO 100% Creatine pouch, made entirely by prompting an AI. I directed the mood, layers, beat-synced motion and seamless 6-second loop; the AI wrote the code."
+  },
+  {
+    title: "Rio Punch Carnival",
+    category: "ai",
+    categoryLabel: "AI Motion — Prompted",
+    year: "2026",
+    ai: true,
+    loop: "assets/loops/rio-punch.html",
+    images: ["assets/img/ai-rio-punch-poster.jpg"],
+    desc: "A carnival-themed motion loop for Juice Monster Rio Punch (unofficial concept), made entirely by prompting an AI. Sunburst, palm fronds, orbiting fruit and a juice splash on every beat, all directed by me in plain language."
+  }
+];
+
+/* AI Lab showcase — the "direction" lines describe what I asked the AI for.
+   EDIT ME: replace them with your real prompt notes if you like. */
+const AI_PIECES = [
+  {
+    title: "Creatine Surge",
+    brand: "ONTHEGO — product loop",
+    file: "creatine-surge.html",
+    loop: "assets/loops/creatine-surge.html",
+    poster: "assets/img/ai-creatine-surge-poster.jpg",
+    c1: "#d9161c", c2: "#ff3b30",
+    lines: [
+      "product: ONTHEGO 100% Creatine pouch, hero on the right",
+      "mood: black fading into blood red, gym energy",
+      "type: giant italic CREATINE marquee behind everything",
+      "motion: pouch floats, punches on the beat, shockwave ring",
+      "layers: halftone wave, speed streaks, rising sparks",
+      "loop: 6 seconds, seamless, no visible restart",
+      "layout: works in portrait and landscape"
+    ],
+    specs: ["6s seamless loop", "Live canvas code", "Portrait + landscape", "AI-prompted"]
+  },
+  {
+    title: "Rio Punch Carnival",
+    brand: "Juice Monster — concept loop",
+    file: "rio-punch.html",
+    loop: "assets/loops/rio-punch.html",
+    poster: "assets/img/ai-rio-punch-poster.jpg",
+    c1: "#5fd12a", c2: "#ffe100",
+    lines: [
+      "product: Rio Punch can, floating centre stage",
+      "mood: Rio carnival, Brazil-flag diamond, sticker type",
+      "motion: 8 beats per loop, juice splash on every hit",
+      "layers: sunburst, palm fronds, orbiting fruit, confetti",
+      "waves: three teal layers rolling against each other",
+      "loop: 8 seconds, seamless",
+      "layout: works in portrait and landscape"
+    ],
+    specs: ["8s seamless loop", "Live canvas code", "Portrait + landscape", "AI-prompted"]
   }
 ];
 
 /* Projects featured in the horizontal highlight reel (by title) */
-const REEL = ["Rockify", "Metallicorn", "Photo Manipulation Poster", "Aga's Jello", "MYVI", "Montigo", "Stash Padu × ASNB"];
+const REEL = ["Creatine Surge", "Rio Punch Carnival", "Rockify", "Metallicorn", "Photo Manipulation Poster", "Aga's Jello", "MYVI", "Montigo", "Stash Padu × ASNB"];
 
 /* Rotating words under the hero */
-const ROLES = ["Brand Identity", "3D Product Viz", "Digital Art", "UI / UX", "Web Design", "Art Direction", "Over-delivering"];
+const ROLES = ["Brand Identity", "3D Product Viz", "Digital Art", "UI / UX", "Web Design", "AI Prompting", "Art Direction", "Over-delivering"];
 
 /* =========================================================
    HELPERS + GLOBAL STATE
@@ -148,17 +209,22 @@ function splitWords(el){
     if (typeof content === 'string') w.textContent = content; else w.appendChild(content);
     wrap.appendChild(w); el.appendChild(wrap);
   };
+  let lastWord = null, spaceBefore = true;
   nodes.forEach(node => {
     if (node.nodeType === 3){
-      node.textContent.split(/\s+/).filter(Boolean).forEach(word => {
-        addWord(word);
-        el.appendChild(document.createTextNode(' '));
+      const txt = node.textContent;
+      if (!txt.trim()){ if (txt.length) spaceBefore = true; return; }
+      txt.split(/\s+/).filter(Boolean).forEach((word, i) => {
+        if (i === 0 && !/^\s/.test(txt) && !spaceBefore && lastWord){ lastWord.appendChild(document.createTextNode(word)); return; }
+        if (n) el.appendChild(document.createTextNode(' '));
+        addWord(word); lastWord = el.lastChild.firstChild;
       });
+      spaceBefore = /\s$/.test(txt);
     } else {
-      // attach inline elements (like the red full stop) to the previous word
-      const last = el.querySelector('.sw-wrap:last-of-type .sw');
-      if (last) { el.lastChild.nodeType === 3 && el.removeChild(el.lastChild); last.appendChild(node); }
-      else addWord(node);
+      // an element glued to the previous word (e.g. the red full stop) joins that word
+      if (!spaceBefore && lastWord) lastWord.appendChild(node);
+      else { if (n) el.appendChild(document.createTextNode(' ')); addWord(node); lastWord = el.lastChild.firstChild; }
+      spaceBefore = false;
     }
   });
 }
@@ -496,13 +562,14 @@ function updateMarquees(){
 function buildWork(){
   const grid = $('#grid'), list = $('#indexList');
   grid.innerHTML = PROJECTS.map((p, i) => `
-    <article class="card" data-cat="${p.category}" data-index="${i}" tabindex="0" role="button" aria-label="Open ${p.title}">
+    <article class="card${p.ai ? ' card--ai' : ''}" data-cat="${p.category}" data-index="${i}" tabindex="0" role="button" aria-label="Open ${p.title}">
       <div class="card__inner">
         <div class="card__media">
           <img src="${p.images[0]}" alt="${p.title}" loading="lazy">
           <span class="card__tag">${p.categoryLabel}</span>
           <span class="card__num">${pad(i + 1)}/${pad(PROJECTS.length)}</span>
           ${p.images.length > 1 ? `<span class="card__count">+${p.images.length - 1} more</span>` : ''}
+          ${p.loop ? `<span class="card__live"><i></i>Live loop · AI-prompted</span>` : ''}
           <span class="card__glare"></span>
         </div>
         <div class="card__body">
@@ -515,7 +582,7 @@ function buildWork(){
   list.innerHTML = PROJECTS.map((p, i) => `
     <li class="index-item" data-cat="${p.category}" data-index="${i}" tabindex="0" role="button" aria-label="Open ${p.title}">
       <span class="index-item__n">${pad(i + 1)}</span>
-      <span class="index-item__t">${p.title}</span>
+      <span class="index-item__t">${p.title}${p.ai ? ' <sup class="index-item__ai">AI</sup>' : ''}</span>
       <span class="index-item__c">${p.categoryLabel}</span>
       <span class="index-item__y">${p.year}</span>
     </li>`).join('');
@@ -631,6 +698,80 @@ function updateReel(){
 }
 
 /* =========================================================
+   AI LAB — live loops in frames, direction notes typed out
+   ========================================================= */
+function buildAILab(){
+  const wrap = $('#aiPieces');
+  if (!wrap) return;
+  wrap.innerHTML = AI_PIECES.map((a, i) => `
+    <article class="ai-piece${i % 2 ? ' ai-piece--flip' : ''}" style="--pc:${a.c1};--pc2:${a.c2}">
+      <div class="ai-piece__screen reveal">
+        <div class="ai-piece__chrome">
+          <span></span><span></span><span></span>
+          <b>${a.file}</b>
+          <em class="ai-piece__live"><i></i>LIVE</em>
+        </div>
+        <div class="ai-piece__view">
+          <img class="ai-piece__poster" src="${a.poster}" alt="${a.title} — still frame" loading="lazy">
+          <iframe data-src="${a.loop}" title="${a.title} — live animated loop" tabindex="-1"></iframe>
+        </div>
+        <span class="ai-piece__stamp" aria-hidden="true">AI<br>PROMPTED</span>
+      </div>
+      <div class="ai-piece__info">
+        <p class="ai-piece__brand reveal">${a.brand}</p>
+        <h3 class="ai-piece__title reveal">${a.title}</h3>
+        <div class="ai-term reveal">
+          <div class="ai-term__bar"><span>direction.txt</span><span>human → AI</span></div>
+          <pre class="ai-term__body" aria-label="Creative direction: ${a.lines.join('; ')}"></pre>
+        </div>
+        <ul class="ai-piece__specs reveal">${a.specs.map(x => `<li>${x}</li>`).join('')}</ul>
+        <div class="ai-piece__actions reveal">
+          <button class="ai-piece__toggle" type="button" data-hover>Pause</button>
+          <a href="${a.loop}" target="_blank" rel="noopener" data-hover>Open full screen ↗</a>
+        </div>
+      </div>
+    </article>`).join('');
+
+  $$('.ai-piece', wrap).forEach((piece, i) => {
+    const frame = $('iframe', piece), toggle = $('.ai-piece__toggle', piece), term = $('.ai-term__body', piece);
+    let userPaused = REDUCED, visible = false, typed = false;
+    if (REDUCED) toggle.textContent = 'Play';
+    const send = msg => { try { if (frame.contentWindow) frame.contentWindow.postMessage(msg, '*'); } catch (e) {} };
+    const sync = () => {
+      const play = visible && !userPaused;
+      send(play ? 'loop:play' : 'loop:pause');
+      piece.classList.toggle('is-paused', !play);
+    };
+    frame.addEventListener('load', () => { if (frame.src) piece.classList.add('is-loaded'); sync(); });
+    toggle.addEventListener('click', () => {
+      userPaused = !userPaused;
+      toggle.textContent = userPaused ? 'Play' : 'Pause';
+      sync();
+    });
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible && !frame.getAttribute('src')) frame.src = frame.dataset.src;
+      if (visible && !typed){ typed = true; typeLines(term, AI_PIECES[i].lines); }
+      sync();
+    }, { rootMargin: '150px 0px' }).observe(piece);
+  });
+}
+function typeLines(el, lines){
+  const P = '<span class="ai-term__p">›</span> ';
+  if (REDUCED){ el.innerHTML = lines.map(l => P + l).join('\n'); return; }
+  let li = 0, ci = 0, out = '';
+  const tick = () => {
+    if (li >= lines.length){ el.innerHTML = out + '<span class="ai-term__caret"></span>'; return; }
+    const line = lines[li];
+    ci++;
+    el.innerHTML = out + P + line.slice(0, ci) + '<span class="ai-term__caret"></span>';
+    if (ci >= line.length){ out += P + line + '\n'; li++; ci = 0; setTimeout(tick, 260); }
+    else setTimeout(tick, 16 + Math.random() * 30);
+  };
+  tick();
+}
+
+/* =========================================================
    LIGHTBOX
    ========================================================= */
 let lbP = 0, lbI = 0, lastFocus = null;
@@ -646,20 +787,25 @@ function openLightbox(index){
 }
 function closeLightbox(){
   lb.classList.remove('open');
+  const fr = $('#lightboxFrame'); fr.hidden = true; fr.src = 'about:blank';
   document.body.style.overflow = '';
   if (lastFocus) lastFocus.focus({ preventScroll: true });
 }
 function renderLightbox(instant){
   const p = PROJECTS[lbP];
+  const frame = $('#lightboxFrame');
+  frame.hidden = !p.loop; lbImg.hidden = !!p.loop;
+  if (p.loop && frame.getAttribute('src') !== p.loop) frame.src = p.loop;
   const apply = () => {
     lbImg.src = p.images[lbI]; lbImg.alt = `${p.title} — image ${lbI + 1}`;
     lbImg.onload = () => lbImg.classList.remove('swap');
     if (lbImg.complete) lbImg.classList.remove('swap');
   };
-  if (instant) apply(); else { lbImg.classList.add('swap'); setTimeout(apply, 180); }
+  if (p.loop) { /* live frame shown instead */ } else if (instant) apply(); else { lbImg.classList.add('swap'); setTimeout(apply, 180); }
   $('#lightboxCat').textContent = `${pad(lbP + 1)} — ${p.categoryLabel} — ${p.year}`;
   $('#lightboxTitle').textContent = p.title;
   $('#lightboxDesc').textContent = p.desc;
+  lb.classList.toggle('is-ai', !!p.ai);
   const multi = p.images.length > 1;
   $('#lightboxPrev').hidden = !multi; $('#lightboxNext').hidden = !multi;
   $('#lightboxDots').innerHTML = multi ? p.images.map((_, i) => `<button class="${i === lbI ? 'on' : ''}" data-i="${i}" aria-label="Image ${i + 1}"></button>`).join('') : '';
@@ -829,7 +975,10 @@ function frame(){
    INIT
    ========================================================= */
 $('#year').textContent = new Date().getFullYear();
+const statProjects = $('#statProjects');
+if (statProjects) statProjects.dataset.count = PROJECTS.length;
 buildWork();
+buildAILab();
 initFilters();
 initLightbox();
 buildReel();
