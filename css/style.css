@@ -21,6 +21,7 @@
   --font-display: 'Anton', 'Arial Narrow Bold', 'Helvetica Neue', Impact, sans-serif;
   --font-mono: 'Space Mono', ui-monospace, Menlo, monospace;
   --skew: 0deg;           /* driven by scroll velocity in JS */
+  color-scheme: dark;
 }
 
 *,*::before,*::after{ box-sizing: border-box; }
